@@ -7,11 +7,14 @@
   },
   "dependencies": {
     "chokidar": "^3.6.0",
+    "csv-writer": "^1.6.0",
     "express": "^4.21.2",
     "nunjucks": "^3.2.4"
   },
   "version": "1.0.0",
   "description": "Práctica de la asignatura Sistemas Software Basados en Web del máster de Ingeniería Informática.",
-  "devDependencies": {},
+  "devDependencies": {
+    "playwright": "^1.51.0"
+  },
   "license": "ISC"
 }
