@@ -30,7 +30,7 @@ async function obtenerInfoDeObra(url) {
   const descripcion = await page.locator(".body-content").first().innerText();
   const procedencia = await page.locator(".body-content").nth(1).innerText();
   const comentario = await page.locator(".body-content").nth(2).innerText();
-  const imagen = await page.locator(".wrap-img").getAttribute("src");
+  const imagen = await page.locator(".wrap-img img").getAttribute("src");
 
   return { titulo, descripcion, procedencia, comentario, imagen };
 }
