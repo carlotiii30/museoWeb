@@ -30,7 +30,8 @@ async function obtenerInfoDeObra(url) {
   const descripcion = await page.locator(".body-content").first().innerText();
   const procedencia = await page.locator(".body-content").nth(1).innerText();
   const comentario = await page.locator(".body-content").nth(2).innerText();
-  const imagen = await page.locator(".wrap-img img").getAttribute("src");
+  const url_imagen = await page.locator(".wrap-img img").getAttribute("src");
+  const imagen = `https://www.museosdeandalucia.es${url_imagen}`;
 
   return { titulo, descripcion, procedencia, comentario, imagen };
 }
@@ -59,16 +60,18 @@ const lista_info_para_BD = [];
 
 for (const pag of obras_singulares) {
   const urls = await obtenerUrlsDeObras(pag);
-  enlaces_de_obras_singulares.push(...urls); // ... operador spread ES6 -> Convierte la lista en elementos
+  enlaces_de_obras_singulares.push(...urls);
 }
 console.log("🚀 Hay ", enlaces_de_obras_singulares.length, " obras singulares");
 
+// recuperamos la información de cada obra
 for (const url of enlaces_de_obras_singulares) {
   const info_obra = await obtenerInfoDeObra(url);
   lista_info_para_BD.push(info_obra);
 }
 console.log("🚀 Se han extraído todas las obras");
 
-guardarEnDisco("./data/info_obras.json", lista_info_para_BD);
+// guardamos la información en un archivo JSON
+guardarEnDisco("./fill_db/data/info_obras.json", lista_info_para_BD);
 
 await browser.close();
