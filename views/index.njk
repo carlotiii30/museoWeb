@@ -2,17 +2,41 @@
 
 {% block contenido %}
 <!-- Hero Section -->
-<section class="hero d-flex align-items-center" style="background: url('/images/hero-bg.jpg') center/cover no-repeat; height: 90vh;">
-  <div class="container text-center text-white">
-    <h1 class="welcome-title">Bienvenido al Museo Arqueológico</h1>
-    <p class="welcome-text">Explora nuestra increíble colección de arte e historia.</p>
-    <a href="/coleccion" class="btn btn-light btn-lg welcome-btn">Explorar Ahora</a>
+<section class="hero d-flex align-items-center position-relative" style="background: url('/images/hero-bg.jpg') center/cover no-repeat; height: 90vh;">
+  <div class="container text-center text-white position-relative">
+
+    <!-- Formulario -->
+    <form method="GET" action="/obras/buscar"
+      class="position-absolute start-50 translate-middle-x"
+      style="top: -200px; z-index: 2;">
+      <div class="d-flex justify-content-center align-items-center gap-2 flex-nowrap">
+        <input 
+          type="text" 
+          name="búsqueda" 
+          class="form-control btn-search-form" 
+          placeholder="Buscar una obra..." 
+          pattern="\w+" 
+          title="Introduce solo una palabra (sin espacios)" 
+          required
+          style="width: 300px;"
+        >
+        <button type="submit" class="btn btn-outline-light btn-search">Buscar</button>
+      </div>
+    </form>
+
+    <!-- Bloque de bienvenida -->
+    <div class="d-flex flex-column justify-content-center align-items-center h-100">
+      <h1 class="welcome-title">Bienvenido al Museo Arqueológico</h1>
+      <p class="welcome-text">Explora nuestra increíble colección de arte e historia.</p>
+      <a href="/obras" class="btn btn-light btn-lg welcome-btn mt-3">Explorar Ahora</a>
+    </div>
+
   </div>
 </section>
 
 <!-- Sección de Información -->
 <section class="container text-center my-5">
-  <h2 class="history-title">Descubre nuestra Historia</h2>
+  <h2 class="title-section">Descubre nuestra Historia</h2>
   <p>El Museo Arqueológico alberga piezas únicas de la historia y el arte.</p>
   <a href="/historia" class="btn btn-primary btn-custom">Saber más</a>
 </section>

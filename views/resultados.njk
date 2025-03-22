@@ -1,0 +1,29 @@
+{% extends "base.njk" %}
+
+{% block contenido %}
+<div class="container my-5">
+  <h1 class="text-center mb-4 title-section">Resultados para: "{{ búsqueda }}"</h1>
+
+  {% if resultados.length > 0 %}
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      {% for obra in resultados %}
+        <div class="col">
+          <a href="/obras/{{ obra.id }}" class="text-decoration-none text-dark d-block h-100">
+            <div class="card h-100 shadow-sm hover-shadow">
+              {% if obra.imagen and obra.imagen != "No disponible" %}
+                <img src="/{{ obra.imagen }}" class="card-img-top" alt="Imagen de {{ obra.titulo }}">
+              {% endif %}
+              <div class="card-body">
+                <h5 class="card-title">{{ obra.titulo }}</h5>
+                <p class="card-text"><strong>Procedencia:</strong> {{ obra.procedencia }}</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-center mt-5">No se encontraron resultados para esa palabra.</p>
+  {% endif %}
+</div>
+{% endblock %}

@@ -17,13 +17,22 @@ async function descargarImagen(url, filepath) {
   writeFileSync(filepath, buffer);
 }
 
-const imagenesDir = "./fill_db/data/imagenes";
+const imagenesDir = "./images";
 mkdirSync(imagenesDir, { recursive: true });
 
 // Función para generar un nombre de archivo válido a partir del título
 function generarNombreArchivo(titulo) {
   return titulo.toLowerCase().replace(/[^a-z0-9]/g, "_") + ".png";
 }
+
+// Función para eliminar el contenido de la base de datos
+async function eliminarContenidoBD() {
+  console.log("🗑️ Eliminando contenido de la base de datos...");
+  await prisma.obra.deleteMany({});
+}
+
+// Eliminar contenido de la base de datos antes de insertar nuevas obras
+await eliminarContenidoBD();
 
 // Insertar obras en la base de datos
 console.log("🚀 Guardando obras en la base de datos...");
@@ -35,7 +44,7 @@ await Promise.all(
     // Generar nombre de archivo basado en el título
     const imagenFilename = generarNombreArchivo(titulo);
     const imagenPath = path.join(imagenesDir, imagenFilename);
-    await descargarImagen(imagen, imagenPath);
+    //await descargarImagen(imagen, imagenPath);
 
     await prisma.obra.create({
       data: {
@@ -48,9 +57,5 @@ await Promise.all(
     });
   })
 );
-
-// Consultar y mostrar las obras guardadas
-const todasLasObras = await prisma.obra.findMany();
-console.log("📄 Obras guardadas en la base de datos:", todasLasObras);
 
 await prisma.$disconnect();

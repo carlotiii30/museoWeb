@@ -1,0 +1,22 @@
+{% extends "base.njk" %}
+
+{% block contenido %}
+<div class="container my-5">
+  <a href="/obras" class="btn btn-outline-secondary mb-4 btn-back">&larr; Volver a la lista</a>
+
+  <div class="card shadow-lg">
+    {% if obra.imagen and obra.imagen != "No disponible" %}
+      <img src="{{ obra.imagen }}" class="card-img-top" alt="Imagen de {{ obra.titulo }}">
+    {% endif %}
+    <div class="card-body">
+      <h2 class="card-title title-section" style="padding: 10px 0px">{{ obra.titulo }}</h2>
+      <p class="card-text"><strong>Procedencia:</strong> {{ obra.procedencia }}</p>
+      <p class="card-text"><strong>Descripción:</strong> {{ obra.descripcion }}</p>
+      <div class="card-text">
+        <p><strong>Comentario:</strong> <em>{{ obra.comentario }}</em></p>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
