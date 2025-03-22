@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Rutas
 app.get("/", (req, res) => {
-  res.render("index.njk", { titulo: "Bienvenido al Museo SSBW" });
+  res.render("index.njk", { titulo: "Bienvenido al Museo Arqueológico" });
 });
 
 // Iniciar servidor
