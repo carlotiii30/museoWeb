@@ -1,0 +1,18 @@
+{% extends "base.njk" %}
+
+{% block contenido %}
+<div class="container my-5" style="max-width: 500px;">
+  <h2 class="text-center mb-4">Iniciar sesión</h2>
+  <form method="POST" action="/login">
+    <div class="mb-3">
+      <label for="correo" class="form-label">Correo electrónico</label>
+      <input type="correo" class="form-control" id="correo" name="correo" required>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Contraseña</label>
+      <input type="password" class="form-control" id="password" name="password" required>
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
+  </form>
+</div>
+{% endblock %}
