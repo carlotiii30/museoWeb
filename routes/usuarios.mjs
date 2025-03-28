@@ -62,7 +62,12 @@ router.post("/login", async (req, res) => {
 
 // Ruta para manejar el logout
 router.get("/logout", (req, res) => {
-  res.clearCookie("access_token").render("index.njk");
+  res.clearCookie("access_token").redirect("/");
+});
+
+// Ruta para mostrar el formulario de registro
+router.get("/registro", (req, res) => {
+  res.render("registro.njk");
 });
 
 // Ruta para manejar el registro
@@ -89,7 +94,6 @@ router.post("/registro", async (req, res) => {
         nombre,
         correo,
         password: hashedPassword,
-        rol: "usuario",
       },
     });
 

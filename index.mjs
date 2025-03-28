@@ -33,7 +33,6 @@ const autentificacion = (req, res, next) => {
       req.rol = data.rol;
       res.locals.usuario = data.usuario;
       res.locals.rol = data.rol;
-      console.log("En el request ", req.usuario, req.rol);
     } catch (error) {
       console.error("Error al verificar el token:", error.message);
     }
