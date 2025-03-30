@@ -2,7 +2,7 @@
 
 {% block contenido %}
 <div class="container my-5" style="max-width: 500px;">
-  <h2 class="text-center mb-4">Iniciar sesión</h2>
+  <h2 class="text-center mb-4 title-section">Iniciar sesión</h2>
   <form method="POST" action="/usuarios/login">
     <div class="mb-3">
       <label for="correo" class="form-label">Correo electrónico</label>
@@ -12,7 +12,7 @@
       <label for="password" class="form-label">Contraseña</label>
       <input type="password" class="form-control" id="password" name="password" required>
     </div>
-    <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
+    <button type="submit" class="btn btn-primary w-100 btn-custom">Iniciar sesión</button>
   </form>
 </div>
 {% endblock %}

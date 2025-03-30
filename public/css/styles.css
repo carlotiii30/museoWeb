@@ -73,11 +73,19 @@
     width: auto;
 }
 
-.btn-search, .btn-search-form, .btn-back {
+.btn-search, .btn-search-form, .btn-back, .btn-login, .btn-register {
     border-radius: 25px;
 }
 
-.btn-search:hover, .btn-back:hover {
+.btn-logout {
+    color: #ffffff;
+}
+
+.btn-logout:hover {
+    color: #b6999c;
+}
+
+.btn-search:hover, .btn-back:hover, .btn-register:hover {
     border-radius: 25px;
     background-color: rgb(139, 87, 74);
     border-color:  rgb(139, 87, 74);

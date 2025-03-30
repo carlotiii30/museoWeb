@@ -6,7 +6,7 @@
 
   <div class="card shadow-lg">
     {% if obra.imagen and obra.imagen != "No disponible" %}
-      <img src="{{ obra.imagen }}" class="card-img-top" alt="Imagen de {{ obra.titulo }}">
+      <img src="../{{ obra.imagen }}" class="card-img-top" alt="Imagen de {{ obra.titulo }}">
     {% endif %}
     <div class="card-body">
       <h2 class="card-title title-section" style="padding: 10px 0px">{{ obra.titulo }}</h2>
@@ -14,7 +14,6 @@
       <p class="card-text"><strong>Descripción:</strong> {{ obra.descripcion }}</p>
       <div class="card-text">
         <p><strong>Comentario:</strong> <em>{{ obra.comentario }}</em></p>
-      </div>
       </div>
     </div>
   </div>
