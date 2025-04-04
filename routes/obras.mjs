@@ -1,10 +1,14 @@
+import logger from "../logger.mjs";
+
 import express from "express";
 const router = express.Router();
 
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
+// Ruta para obtener todas las obras
 router.get("/", async (req, res) => {
+  logger.info("Solicitando todas las obras");
   try {
     const obras = await prisma.obra.findMany();
 
@@ -13,15 +17,18 @@ router.get("/", async (req, res) => {
       obras,
     });
   } catch (error) {
-    console.error("Error al obtener las obras:", error);
+    logger.error("Error al obtener las obras:", error);
     res.status(500).send("Error al cargar las obras.");
   }
 });
 
+// Ruta para buscar obras
 router.get("/buscar", async (req, res) => {
   const búsqueda = req.query.búsqueda?.trim();
+  logger.info(`Búsqueda solicitada: "${búsqueda}"`);
 
   if (!búsqueda || /\s/.test(búsqueda)) {
+    logger.warn("Búsqueda inválida: solo se permite una palabra");
     return res.status(400).send("Solo se permite una palabra en la búsqueda.");
   }
 
@@ -42,13 +49,15 @@ router.get("/buscar", async (req, res) => {
       resultados,
     });
   } catch (err) {
-    console.error(err);
+    logger.error("GET /obras/buscar - Error interno del servidor:", err);
     res.status(500).send("Error interno del servidor.");
   }
 });
 
+// Ruta para obtener una obra específica por ID
 router.get("/:id", async (req, res) => {
   const id = parseInt(req.params.id);
+  logger.info(`Solicitando obra con ID: ${id}`);
 
   try {
     const obra = await prisma.obra.findUnique({
@@ -56,15 +65,17 @@ router.get("/:id", async (req, res) => {
     });
 
     if (!obra) {
+      logger.warn(`Obra no encontrada`);
       return res.status(404).send("Obra no encontrada");
     }
 
+    logger.info(`Obra encontrada: ${obra.titulo}`);
     res.render("obra.njk", {
       titulo: obra.titulo,
       obra,
     });
   } catch (err) {
-    console.error("Error al obtener la obra:", err);
+    logger.error(`Error al obtener la obra:`, err);
     res.status(500).send("Error interno del servidor");
   }
 });

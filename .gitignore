@@ -400,3 +400,9 @@ FodyWeavers.xsd
 *.sln.iml
 
 .env
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

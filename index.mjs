@@ -6,6 +6,7 @@ import obrasRouter from "./routes/obras.mjs";
 import usuariosRouter from "./routes/usuarios.mjs";
 import cookieParser from "cookie-parser";
 import jwt from "jsonwebtoken";
+import logger from "./logger.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const IN = process.env.IN || "development";
@@ -34,7 +35,7 @@ const autentificacion = (req, res, next) => {
       res.locals.usuario = data.usuario;
       res.locals.rol = data.rol;
     } catch (error) {
-      console.error("Error al verificar el token:", error.message);
+      logger.error("Error al verificar el token:", error.message);
     }
   }
   next();
