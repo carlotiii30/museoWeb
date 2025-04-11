@@ -1,28 +1,28 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["fullTextSearchPostgres"]
 }
-				
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-												
+
 model Obra {
-  id            Int @id @default(autoincrement())
-  titulo        String
-  imagen        String
-  descripcion   String
-  procedencia   String
-  comentario    String
+  id          Int    @id @default(autoincrement())
+  titulo      String
+  imagen      String
+  descripcion String
+  procedencia String
+  comentario  String
 }
 
 model Usuario {
-  correo    String @id
-  nombre    String
-  password  String
-  rol       ROL @default(USUARIO)
-}	
+  correo   String @id
+  nombre   String
+  password String
+  rol      ROL    @default(USUARIO)
+}
 
 enum ROL {
   USUARIO

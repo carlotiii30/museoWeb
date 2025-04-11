@@ -4,9 +4,11 @@ import path from "path";
 import { fileURLToPath } from "url";
 import obrasRouter from "./routes/obras.mjs";
 import usuariosRouter from "./routes/usuarios.mjs";
+import apiRouter from "./routes/api.mjs";
 import cookieParser from "cookie-parser";
 import jwt from "jsonwebtoken";
 import logger from "./logger.mjs";
+import configureSwagger from "./swagger.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const IN = process.env.IN || "development";
@@ -49,6 +51,9 @@ app.get("/", (req, res) => {
 
 app.use("/obras", obrasRouter);
 app.use("/usuarios", usuariosRouter);
+app.use("/api", apiRouter);
+
+configureSwagger(app);
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {

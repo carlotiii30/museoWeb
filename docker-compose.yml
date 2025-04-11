@@ -1,8 +1,8 @@
 volumes: 
   psql:
-					
+
 services:
-  psql:
+  db:
     image: postgres:17-alpine
     restart: unless-stopped
     ports:

@@ -1,0 +1,22 @@
+# Obtener información de un usuario existente
+GET http://localhost:8000/api/usuario/carlota
+###
+
+# Obtener información de un usuario inexistente
+GET http://localhost:8000/api/usuario/inexistente@example.com
+###
+
+# Obtener el número total de obras
+GET http://localhost:8000/api/obra/cuantas
+###
+
+# Obtener un rango de obras
+GET http://localhost:8000/api/obra?desde=0&hasta=5
+###
+
+# Obtener información de una obra específica
+GET http://localhost:8000/api/obra/12
+###
+
+# Eliminar una obra específica
+DELETE http://localhost:8000/api/obra/9999
