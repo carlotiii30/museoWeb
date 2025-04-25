@@ -2,6 +2,7 @@
   "name": "practicas-ssbw",
   "author": "Carlota",
   "main": "index.mjs",
+  "type": "module",
   "scripts": {
     "dev": "node --watch --env-file=.env index.mjs"
   },

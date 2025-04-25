@@ -3,20 +3,47 @@
 {% block contenido %}
 <div class="container my-5" style="max-width: 500px;">
   <h2 class="text-center mb-4 title-section">Registrarse</h2>
-  <form method="POST" action="/usuarios/registro">
+  {% if error %}
+    <div class="alert alert-danger">{{ error }}</div>
+  {% endif %}
+  <form method="POST" action="/usuarios/registro" onsubmit="return validarRegistro()">
     <div class="mb-3">
-      <label for="username" class="form-label">Nombre de usuario</label>
-      <input type="text" class="form-control" id="nombre" name="nombre" required>
+      <label for="nombre" class="form-label">Nombre de usuario</label>
+      <input type="text" class="form-control" id="nombre" name="nombre" required autofocus>
     </div>
+
     <div class="mb-3">
       <label for="correo" class="form-label">Correo electrónico</label>
-      <input type="correo" class="form-control" id="correo" name="correo" required>
+      <input type="email" class="form-control" id="correo" name="correo" required onblur="validarCorreo(this)" placeholder="ejemplo@correo.com">
+      <div class="invalid-feedback" id="correo-error">Introduce un correo válido.</div>
     </div>
+
     <div class="mb-3">
       <label for="password" class="form-label">Contraseña</label>
-      <input type="password" class="form-control" id="password" name="password" required>
+      <div class="input-group">
+        <input type="password" class="form-control" id="password" name="password" required onblur="validarPassword(this)" placeholder="Mínimo 8 caracteres">
+        <button class="btn btn-outline-secondary" type="button" onclick="togglePassword()" id="togglePasswordBtn" aria-label="Mostrar contraseña">
+          <i class="bi bi-eye" id="togglePasswordIcon"></i>
+        </button>
+      </div>
+      <div class="invalid-feedback" id="password-error">La contraseña debe tener al menos 8 caracteres.</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="confirm-password" class="form-label">Confirmar contraseña</label>
+      <div class="input-group">
+        <input type="password" class="form-control" id="confirm-password" name="confirm-password" required onblur="validarConfirmacion()" placeholder="Repite la contraseña">
+        <button class="btn btn-outline-secondary" type="button" onclick="toggleConfirmPassword()" id="toggleConfirmBtn" aria-label="Mostrar contraseña de confirmación">
+          <i class="bi bi-eye" id="toggleConfirmIcon"></i>
+        </button>
+      </div>
+      <div class="invalid-feedback" id="confirm-error">Las contraseñas no coinciden.</div>
     </div>
     <button type="submit" class="btn btn-primary w-100 btn-custom">Registrarse</button>
   </form>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/js/registro.js" defer></script>
 {% endblock %}

@@ -16,7 +16,7 @@ test("Logging pp", async ({ page }) => {
   await page.goto("http://localhost:8000/usuarios/login");
 
   await page.fill("#correo", "pp@pp.com");
-  await page.fill("#password", "pp");
+  await page.fill("#password", "contraseñadepp");
   await page.click('button:has-text("Iniciar sesión")');
 
   await expect(

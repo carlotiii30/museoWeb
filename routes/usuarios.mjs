@@ -96,7 +96,7 @@ router.post("/registro", async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Crear el nuevo usuario en la base de datos
-    await prisma.usuario.create({
+    const user = await prisma.usuario.create({
       data: {
         nombre,
         correo,
@@ -105,12 +105,29 @@ router.post("/registro", async (req, res) => {
     });
 
     logger.info(`Usuario registrado exitosamente: ${correo}`);
+
+    // Generar el token JWT
+    const token = jwt.sign(
+      { usuario: user.nombre, correo: user.correo, rol: user.rol },
+      process.env.SECRET_KEY,
+      { expiresIn: "2h" }
+    );
+
+    logger.info(`Usuario registrado y autenticado: ${correo}`);
+    res.locals.usuario = user.nombre;
+
+    // Configurar la cookie con el token
+    res.cookie("access_token", token, {
+      httpOnly: true,
+      secure: process.env.IN === "production",
+      maxAge: 7200000,
+    });
     res.redirect("/");
   } catch (error) {
     logger.error("Error interno del servidor:", error);
     res
       .status(500)
-      .render("registro.njk", { error: "Error interno del servidor" });
+      .render("login.njk", { error: "Error interno del servidor" });
   }
 });
 

@@ -3,16 +3,38 @@
 {% block contenido %}
 <div class="container my-5" style="max-width: 500px;">
   <h2 class="text-center mb-4 title-section">Iniciar sesión</h2>
-  <form method="POST" action="/usuarios/login">
+  {% if error %}
+    <div class="alert alert-danger">{{ error }}</div>
+  {% endif %}
+  <form method="POST" action="/usuarios/login" onsubmit="return validarFormulario()">
     <div class="mb-3">
       <label for="correo" class="form-label">Correo electrónico</label>
-      <input type="correo" class="form-control" id="correo" name="correo" required>
+      <input type="email" class="form-control" id="correo" name="correo" required onblur="validarCorreo(this)" placeholder="ejemplo@correo.com" autocomplete="email" autofocus>
+      <div class="invalid-feedback" id="correo-error">Introduce un correo válido.</div>
     </div>
+
     <div class="mb-3">
       <label for="password" class="form-label">Contraseña</label>
-      <input type="password" class="form-control" id="password" name="password" required>
+      <div class="input-group">
+        <input type="password" class="form-control" id="password" name="password" required onblur="validarPassword(this)" placeholder="Mínimo 8 caracteres">
+        <button class="btn btn-outline-secondary" type="button" onclick="togglePassword()" id="togglePasswordBtn">
+          <i class="bi bi-eye" id="togglePasswordIcon"></i>
+        </button>
+      </div>
+      <div class="invalid-feedback" id="password-error">La contraseña debe tener al menos 8 caracteres.</div>
     </div>
-    <button type="submit" class="btn btn-primary w-100 btn-custom">Iniciar sesión</button>
+
+    <button type="submit" class="btn btn-primary w-100 btn-custom">
+      Iniciar sesión
+    </button>
   </form>
+
+  <div class="text-center mt-3">
+    ¿Todavía no tienes cuenta? <a href="/usuarios/registro">Regístrate aquí</a>
+  </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/js/login.js" defer></script>
 {% endblock %}
