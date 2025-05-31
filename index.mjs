@@ -9,6 +9,7 @@ import cookieParser from "cookie-parser";
 import jwt from "jsonwebtoken";
 import logger from "./logger.mjs";
 import configureSwagger from "./swagger.js";
+import cors from "cors";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const IN = process.env.IN || "development";
@@ -48,6 +49,13 @@ app.use(autentificacion);
 app.get("/", (req, res) => {
   res.render("index.njk", { titulo: "Bienvenido al Museo Arqueológico" });
 });
+
+app.use(
+  cors({
+    origin: "http://localhost:4321",
+    credentials: true,
+  })
+);
 
 app.use("/obras", obrasRouter);
 app.use("/usuarios", usuariosRouter);

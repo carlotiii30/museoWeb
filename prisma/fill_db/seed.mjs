@@ -8,7 +8,7 @@ function leer_json(file) {
 }
 
 const prisma = new PrismaClient();
-const obras = leer_json("./fill_db/data/info_obras.json");
+const obras = leer_json("./prisma/fill_db/data/info_obras.json");
 
 // Función para descargar una imagen y guardarla localmente
 async function descargarImagen(url, filepath) {
